@@ -1,0 +1,18 @@
+    {% block heading %}
+    <h1>Welcome {{user}}</h1>
+    Which chat room would you like to join?
+
+    {% for channel in channels %}
+    <li><a href="{{ url_for('goToChannel', channel=channel) }}"> {{ channel }}</a></li>
+    {% endfor %}
+
+    {% endblock %}
+
+    {% block body %}
+    Or, you can create a new channel <br>
+    <form action="{{ url_for('updateChannelList') }}" method="post">
+            <input type=text name="channelName">
+            <button>Create New Channel</button>
+    </form>
+    {% endblock %}
+
