@@ -1,2 +1,23 @@
 <!DOCTYPE html>
-This is the general chatroom.
+<html>
+
+<head>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <title id="channel">{{ channel }}</title>
+</head>
+
+<body>
+    <h1>{{ channel }} Messages </h1>
+
+    <ol style="list-style-type:none;" id="messages">
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+    </ol>
+
+    <input type="text" id=message><br>
+    <button id=send>Send Message</button>
+</body>
+
+</html>

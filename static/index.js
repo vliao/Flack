@@ -5,18 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //when connected, configure buttons
     socket.on('connect', () => {
-
-        //Sign in button should emit a sign in event
-        document.querySelector('#signIn').onclick = () => {
-            const user = document.querySelector('#user').value;
-           socket.emit('sign in', {'user': user } );
+        //send message button should emit a send message event
+        document.querySelector('#send').onclick = () => {
+            const message = document.querySelector('#message').value;
+            const channel = document.title;
+           socket.emit('send message', {'message': message, 'channel':channel } );
         }
     })
 
-
-    // when the user is signed in, alert. 
-    socket.on('sign in', data => {
-        alert(`${data.user} is signed in`)
-        socket.emit('')
+    socket.on('update messages', data => {
+        const li = document.createElement('li');
+        li.innerHTML = data.message;
+        document.querySelector('#messages').append(li);
     })
 })
